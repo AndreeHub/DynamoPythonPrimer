@@ -61,6 +61,12 @@ In no particular order, some of the quirks or oddities of the collector:
 
 * Worksets can be filtered, but came as a later addition to the API and they have their own special filter method known as the FilteredWorksetCollector.
 * You can filter just down to the elements in a specific view if you add in the view's ID as a second argument to the constructor.
+* You can filter lists of elements based on the filter if you pass it to the constructor of the FilteredElementCollector, but you first need to cast it into a C# List.
 
-
-
+```python
+#Boilerplate code
+selectedElements = UnwrapElement(IN[0])
+element_Ids=[i.Id for i in selectedElements]
+elements_casted = List[ElementId](element_Ids)
+reduced_selection = FilteredElementCollector(doc, typeElements).OfCategory(BuiltInCategory.OST_DuctCurves).ToElements()
+```
